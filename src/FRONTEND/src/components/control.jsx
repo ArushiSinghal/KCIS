@@ -40,7 +40,7 @@ const PrettoSlider = withStyles({
         marginTop: -8,
         marginLeft: -5,
         '&:focus,&:hover,&$active': {
-        boxShadow: 'inherit',
+            boxShadow: 'inherit',
         },
     },
     active: {},
@@ -55,13 +55,37 @@ const PrettoSlider = withStyles({
         height: 5,
         borderRadius: 4,
     },
-    })(Slider);
+})(Slider);
+
+var tempSlider;
 
 
 class Control extends Component {
-    state = {}
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isOn: "off"
+        };
+    }
+
+    setOn = (event) => {
+        this.setState({ isOn: event.target.value });
+    }
 
     render() {
+
+        if (this.state.isOn == "on") {
+        
+            tempSlider = 
+            <div>
+                <InputLabel>Temperature</InputLabel>
+                <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} min={15} max={30} />
+            </div>
+        } else {
+            tempSlider = <></>
+        }
+
         return (
             <div>
                 <h2 class="h2">Control AC</h2>
@@ -75,15 +99,20 @@ class Control extends Component {
                     </Select>
                     <br></br><br></br>
 
-                    <InputLabel>Temperature</InputLabel>
-                    <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} min={15} max={30}/>
+                    <InputLabel>On/Off</InputLabel>
+                    <Select onChange={this.setOn} value={this.state.isOn}>
+                        <MenuItem value="off">Off</MenuItem>
+                        <MenuItem value="on">On</MenuItem>
+                    </Select>
+                    <br></br><br></br>
+
+                    {tempSlider}
 
                     <Button variant="outlined" color="primary">Set</Button>
                 </form>
             </div>
         );
     }
-
 }
 
 export default Control;
