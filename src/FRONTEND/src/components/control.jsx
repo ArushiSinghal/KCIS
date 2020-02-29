@@ -29,13 +29,13 @@ const marks = [
 
 const PrettoSlider = withStyles({
     root: {
-        color: '#E30425',
+        color: '#0041C2',
         height: 5,
     },
     thumb: {
         height: 20,
         width: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#0041C2',
         border: '2px solid currentColor',
         marginTop: -8,
         marginLeft: -5,
@@ -67,11 +67,11 @@ class Control extends Component {
                 <h2 class="h2">Control AC</h2>
                 <br></br>
                 <form class="form">
-                    <InputLabel>Lab</InputLabel>
+                    <InputLabel>AC</InputLabel>
                     <Select>
-                        <MenuItem value="lab1">Lab 1</MenuItem>
-                        <MenuItem value="lab2">Lab 2</MenuItem>
-                        <MenuItem value="lab3">Lab 3</MenuItem>
+                        <MenuItem value="ac1">AC 1</MenuItem>
+                        <MenuItem value="ac2">AC 2</MenuItem>
+                        <MenuItem value="ac3">AC 3</MenuItem>
                     </Select>
                     <br></br><br></br>
 

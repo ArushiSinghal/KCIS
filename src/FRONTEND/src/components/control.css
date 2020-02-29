@@ -1,6 +1,6 @@
 .h2 {
     position: absolute;
-    top: 15%;
+    top: 55%;
     left: 45%;
 }
 
@@ -9,6 +9,6 @@
     top: 40%;
     left: 45%;
     transform: translate(-50%,-50%);
-    width: 50%;
+    width: 500%;
 }
 
