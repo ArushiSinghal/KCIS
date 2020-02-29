@@ -6,25 +6,7 @@ import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import './control.css';
-
-const marks = [
-    {
-        value: 0,
-        label: '0°C',
-    },
-    {
-        value: 20,
-        label: '20°C',
-    },
-    {
-        value: 37,
-        label: '37°C',
-    },
-    {
-        value: 100,
-        label: '100°C',
-    },
-];
+import axios from 'axios'
 
 
 const PrettoSlider = withStyles({
@@ -65,14 +47,39 @@ class Control extends Component {
         super(props);
 
         this.state = {
-            isOn: "off"
+            isOn: "off",
+            tempvalue:20
         };
-    }
+        this.onSubmit=this.onSubmit.bind(this)
+        this.setTemp=this.setTemp.bind(this)
 
+    }
+    setTemp=(event,value)=>{this.setState({tempvalue:value})}
     setOn = (event) => {
         this.setState({ isOn: event.target.value });
     }
+    onSubmit(e)
+    {
+    
+    if(this.state.isOn=="on"){
+    axios.get('http://localhost:5000/control/on')
+     .then(res=>
+        console.log('hello'))
+    var temp=this.state.tempvalue
+    console.log(temp)
+    axios.post('http://localhost:5000/control/change',{temp})
+    .then(res=>
+        console.log('HELLO FRIENDS'))
+    }
+    else if(this.state.isOn=="off"){
+        axios.get('http://localhost:5000/control/off')
+            .then(res=>
+                console.log('hello')
+                )
+        }
 
+    }
+    
     render() {
 
         if (this.state.isOn == "on") {
@@ -80,7 +87,7 @@ class Control extends Component {
             tempSlider = 
             <div>
                 <InputLabel>Temperature</InputLabel>
-                <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} min={15} max={30} />
+                <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} min={16} max={30} onChange={this.setTemp} />
             </div>
         } else {
             tempSlider = <></>
@@ -108,7 +115,7 @@ class Control extends Component {
 
                     {tempSlider}
 
-                    <Button variant="outlined" color="primary">Set</Button>
+                    <Button variant="outlined" color="primary" onClick={this.onSubmit}>Set</Button>
                 </form>
             </div>
         );

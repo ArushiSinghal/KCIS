@@ -24,8 +24,12 @@ mongoose
   .catch(err => console.log(err))
 
 var Users = require('./routes/Users')
+const ACrouter=require('./routes/ACcontrol');
+
 
 app.use('/users', Users)
+app.use('/control',ACrouter);
+
 
 app.listen(port, function() {
   console.log('Server is running on port: ' + port)
