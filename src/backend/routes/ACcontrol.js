@@ -1,8 +1,10 @@
 const router=require('express').Router();
 
 router.route('/on').get((req,res)=>{
-    
-    var myscript='on.py'
+    // console.log(__dirname)
+    path=__dirname
+    var myscript=path+'/on.py'
+    // console.log(myscript)
     var {PythonShell}=require('python-shell')
     var pyshell=new PythonShell(myscript)
     pyshell.on('message', function (message) {
@@ -18,8 +20,9 @@ router.route('/on').get((req,res)=>{
 });
 });
 router.route('/off').get((req,res)=>{
+    path=__dirname
+    var myscript=path+'/off.py'
     
-    var myscript='off.py'
 
     var {PythonShell}=require('python-shell')
     var pyshell=new PythonShell(myscript)
@@ -40,7 +43,8 @@ router.route('/change').post((req,res)=>{
     console.log(temp)
     x=[temp]
     console.log(x)
-    var myscript='changetemp.py'
+    path=__dirname
+    var myscript=path+'/changetemp.py'
 
     var {PythonShell} = require('python-shell');
     var pyshell = new PythonShell(myscript);
