@@ -13,7 +13,7 @@ class NavBar extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/control">Control</Nav.Link>
                         <Nav.Link href="/data">Data</Nav.Link>
-                        <Nav.Link href="/profile">Profile</Nav.Link>
+                        <Nav.Link href="/password_reset">Setting</Nav.Link>
                     </Nav>
 
                 </Navbar.Collapse>
