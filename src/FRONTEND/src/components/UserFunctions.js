@@ -13,7 +13,9 @@ export const register = newUser => {
     })
     .then(response => {
       console.log('Registered!')
+      
     })
+    
 }
 
 export const login = user => {

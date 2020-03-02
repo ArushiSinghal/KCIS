@@ -35,8 +35,9 @@ class Register extends Component {
       floor: this.state.floor,
 
     }
-
+    console.log(newUser)
     register(newUser).then(res => {
+      
       this.props.history.push(`/login`)
     })
   }

@@ -20,7 +20,10 @@ mongoose
     mongoURI,
     { useNewUrlParser: true }
   )
-  .then(() => console.log('MongoDB Connected'))
+  .then(() =>{ 
+    // mongoose.connection.db.dropDatabase();
+    
+    console.log('MongoDB Connected')})
   .catch(err => console.log(err))
 
 var Users = require('./routes/Users')

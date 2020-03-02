@@ -12,6 +12,8 @@ import Profile from './components/Profile'
 import Control from './components/control.jsx'
 import Data from './components/data.jsx'
 import Setting from './components/profile'
+import View from './components/View'
+
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
             <Route  path="/control" component={Control} />
             <Route  path="/data" component={Data} />
             <Route  path="/password_reset" component={Setting} />
+            <Route  path="/view" component={View} />
+
           </Router>
         )
       }

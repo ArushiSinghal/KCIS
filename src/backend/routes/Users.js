@@ -11,11 +11,15 @@ process.env.SECRET_KEY = 'secret'
 
 users.post('/register', (req, res) => {
   const today = new Date()
+  
   const userData = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
     password: req.body.password,
+    position:req.body.position,
+    lab:req.body.lab,
+    floor:req.body.floor,
     created: today
   }
 
@@ -26,6 +30,8 @@ users.post('/register', (req, res) => {
       if (!user) {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           userData.password = hash
+          
+
           User.create(userData)
             .then(user => {
               res.json({ status: user.email + ' Registered!' })
@@ -51,11 +57,16 @@ users.post('/login', (req, res) => {
       if (user) {
         if (bcrypt.compareSync(req.body.password, user.password)) {
           // Passwords match
+          
           const payload = {
             _id: user._id,
             first_name: user.first_name,
             last_name: user.last_name,
-            email: user.email
+            email: user.email,
+            position:user.position,
+            lab:user.lab,
+            floor:user.floor
+
           }
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: 1440
@@ -76,11 +87,12 @@ users.post('/login', (req, res) => {
 
 users.get('/profile', (req, res) => {
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-
+  console.log('some problem')
   User.findOne({
     _id: decoded._id
   })
     .then(user => {
+      
       if (user) {
         res.json(user)
       } else {

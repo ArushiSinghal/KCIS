@@ -20,7 +20,19 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  position:{
+    type:String,
+    required:true
+  },
+  lab:{
+    type:String,
+    required:true
+  },
+  floor:{
+    type:Number,
+    required:true
+  },
 })
 
 module.exports = User = mongoose.model('users', UserSchema)
