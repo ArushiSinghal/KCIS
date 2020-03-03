@@ -40,9 +40,9 @@ router.route('/off').get((req,res)=>{
 });
 router.route('/change').post((req,res)=>{
     var temp=req.body.temp
-    console.log(temp)
+    
     x=[temp]
-    console.log(x)
+    //console.log(x)
     path=__dirname
     var myscript=path+'/changetemp.py'
 
@@ -65,6 +65,52 @@ router.route('/change').post((req,res)=>{
         console.log('finished');
     });
 
+});
+router.route('/status').get((req,res)=>{
+    path=__dirname
+    var myscript=path+'/checkstatus.py'
+    
+
+    var {PythonShell}=require('python-shell')
+    var pyshell=new PythonShell(myscript)
+    pyshell.on('message', function (message) {
+        // received a message sent from the Python script (a simple "print" statement)
+        console.log(message);
+        res.json(message)
+        // console.log('hello')
+    });
+    // console.log('shit')
+    
+    // console.log(res)
+    pyshell.end(function (err) {
+        if (err){
+            throw err;
+        };
+    
+        console.log('finished');
+});
+});
+router.route('/temp').get((req,res)=>{
+    path=__dirname
+    var myscript=path+'/checktemp.py'
+    
+
+    var {PythonShell}=require('python-shell')
+    var pyshell=new PythonShell(myscript)
+    pyshell.on('message', function (message) {
+        // received a message sent from the Python script (a simple "print" statement)
+        console.log(message);
+        res.json(message)
+        // console.log(res.data)
+    });
+    
+    pyshell.end(function (err) {
+        if (err){
+            throw err;
+        };
+    
+        console.log('finished');
+});
 });
 
 module.exports=router;

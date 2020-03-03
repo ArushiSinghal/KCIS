@@ -64,12 +64,16 @@ class Control extends Component {
     if(this.state.isOn=="on"){
     axios.get('http://localhost:5000/control/on')
      .then(res=>
-        console.log('hello'))
+        {
+            console.log(this.state.tempvalue)
+
+        })
     var temp=this.state.tempvalue
     console.log(temp)
     axios.post('http://localhost:5000/control/change',{temp})
     .then(res=>
-        console.log('HELLO FRIENDS'))
+        console.log(''))
+    
     }
     else if(this.state.isOn=="off"){
         axios.get('http://localhost:5000/control/off')
@@ -100,9 +104,9 @@ class Control extends Component {
                 <form class="form">
                     <InputLabel>AC</InputLabel>
                     <Select>
-                        <MenuItem value="ac1">AC 1</MenuItem>
-                        <MenuItem value="ac2">AC 2</MenuItem>
-                        <MenuItem value="ac3">AC 3</MenuItem>
+                        <MenuItem value="ac1">AARG 1</MenuItem>
+                        <MenuItem value="ac2">AARG 2</MenuItem>
+                        
                     </Select>
                     <br></br><br></br>
 
