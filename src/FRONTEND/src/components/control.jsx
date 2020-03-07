@@ -48,35 +48,53 @@ class Control extends Component {
 
         this.state = {
             isOn: "off",
-            tempvalue:20
+            tempvalue:20,
+            area:'1'
         };
         this.onSubmit=this.onSubmit.bind(this)
         this.setTemp=this.setTemp.bind(this)
+        this.area=this.area.bind(this)
 
     }
     setTemp=(event,value)=>{this.setState({tempvalue:value})}
     setOn = (event) => {
         this.setState({ isOn: event.target.value });
     }
+    area(e){
+        this.setState({area:e})
+    }
     onSubmit(e)
     {
     
     if(this.state.isOn=="on"){
-    axios.get('http://localhost:5000/control/on')
+    let info1={
+        no:this.state.area
+    }
+    console.log(info1)
+    axios.post('http://localhost:5000/control/on',info1)
      .then(res=>
         {
             console.log(this.state.tempvalue)
 
         })
-    var temp=this.state.tempvalue
-    console.log(temp)
-    axios.post('http://localhost:5000/control/change',{temp})
+    
+    let info2={
+        temp:this.state.tempvalue,
+        no:this.state.area
+    }
+    console.log(info2)
+    axios.post('http://localhost:5000/control/change',info2)
     .then(res=>
         console.log(''))
     
     }
     else if(this.state.isOn=="off"){
-        axios.get('http://localhost:5000/control/off')
+        let info1={
+            no:this.state.area
+        }
+    console.log(info1)
+
+        axios.post('http://localhost:5000/control/off',info1)
             .then(res=>
                 console.log('hello')
                 )
@@ -102,12 +120,13 @@ class Control extends Component {
                 <h2 class="h2">Control AC</h2>
                 <br></br>
                 <form class="form">
-                    <InputLabel>AC</InputLabel>
-                    <Select>
-                        <MenuItem value="ac1">AARG 1</MenuItem>
-                        <MenuItem value="ac2">AARG 2</MenuItem>
-                        
-                    </Select>
+                    
+                    <img src={require(('./lab.jpeg'))} alt="resposnive imgage with clickable areas" width="600" height="420" className="aligncenter size-full wp-image-3344" useMap="#image-map" /> 
+                    <map name="image-map">
+                    <area target="_blank"  alt="AC 1" title="AC 1"  coords="7,12,279,81" shape="rect" onClick={()=>this.area(1)}/>
+                   
+                    <area target="_blank"  alt="AC 2" title="AC 2"  coords="338,336,588,405" shape="rect" onClick={()=>this.area(2)}/>
+                     </map>
                     <br></br><br></br>
 
                     <InputLabel>On/Off</InputLabel>

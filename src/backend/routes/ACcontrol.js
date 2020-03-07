@@ -1,12 +1,15 @@
 const router=require('express').Router();
 
-router.route('/on').get((req,res)=>{
+router.route('/on').post((req,res)=>{
     // console.log(__dirname)
     path=__dirname
     var myscript=path+'/on.py'
     // console.log(myscript)
+    var x=[req.body.no]
     var {PythonShell}=require('python-shell')
     var pyshell=new PythonShell(myscript)
+    pyshell.send(JSON.stringify(x));
+
     pyshell.on('message', function (message) {
         // received a message sent from the Python script (a simple "print" statement)
         console.log(message);
@@ -19,13 +22,16 @@ router.route('/on').get((req,res)=>{
         console.log('finished');
 });
 });
-router.route('/off').get((req,res)=>{
+router.route('/off').post((req,res)=>{
     path=__dirname
     var myscript=path+'/off.py'
-    
+    var x=[req.body.no]
+    console.log(x)
 
     var {PythonShell}=require('python-shell')
     var pyshell=new PythonShell(myscript)
+    pyshell.send(JSON.stringify(x));
+
     pyshell.on('message', function (message) {
         // received a message sent from the Python script (a simple "print" statement)
         console.log(message);
@@ -39,9 +45,9 @@ router.route('/off').get((req,res)=>{
 });
 });
 router.route('/change').post((req,res)=>{
-    var temp=req.body.temp
+    // var temp=req.body.temp
     
-    x=[temp]
+    x=[req.body.no,req.body.temp]
     //console.log(x)
     path=__dirname
     var myscript=path+'/changetemp.py'
@@ -67,6 +73,7 @@ router.route('/change').post((req,res)=>{
 
 });
 router.route('/status').get((req,res)=>{
+    // console.log('dada')
     path=__dirname
     var myscript=path+'/checkstatus.py'
     
@@ -91,6 +98,7 @@ router.route('/status').get((req,res)=>{
 });
 });
 router.route('/temp').get((req,res)=>{
+    // console.log('dad')
     path=__dirname
     var myscript=path+'/checktemp.py'
     
