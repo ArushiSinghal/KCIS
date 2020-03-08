@@ -91,6 +91,7 @@ except AttributeError:
 
 
 
+
 _bacnet.PROP_ACKED_TRANSITIONS_swigconstant(_bacnet)
 PROP_ACKED_TRANSITIONS = _bacnet.PROP_ACKED_TRANSITIONS
 
