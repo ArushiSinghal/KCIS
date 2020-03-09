@@ -7,6 +7,9 @@ import sys
 from bs4 import BeautifulSoup
 import pandas as pd
 pd.set_option('display.max_columns', None)  
+import statistics as st
+from datetime import datetime
+import matplotlib.pyplot as plt 
 
 # This method gives the data of latest condition which is currently available on the Hobolink cloud"
 def getLatestConditionFromHobolink():
@@ -58,8 +61,8 @@ def pre_process_data(lines):
     return (df)
 
 # This method gives the last 24 hour data which is currently available on the Hobolink cloud"
-def get_last_24_hour_data(N):
-    #N = 2900
+def get_last_24_hour_data():
+    N = 3480
     file_name = "weather_data_file"
     url = 'https://webservice.hobolink.com/restv2/public/devices/10458863/data_files/latest/txt'
     if os.path.exists(file_name):
@@ -87,10 +90,48 @@ def get_last_24_hour_data(N):
             list_of_lines.append(buffer.decode()[::-1])
     # os.remove(file_name)
     return (pre_process_data(list_of_lines))
-for i in range(1,10):
-    last_24_hour_data = get_last_24_hour_data(290*i)
-    print ((last_24_hour_data.head(4)))
-    print ((last_24_hour_data.tail(4)))
 
-latest_condition_data = getLatestConditionFromHobolink()
-print (latest_condition_data)
+last_24_hour_data = get_last_24_hour_data()
+# print ((last_24_hour_data.head(4)))
+# print ((last_24_hour_data.tail(4)))
+
+avgData = []
+
+for i in range(12,0,-1):
+    temp=[[],[],[],[],[],[],[],[],[]]
+    # print("Day",str(13-i))
+    # print(last_24_hour_data.tail(i*290).head(20))
+    temp2 = (last_24_hour_data.tail(i*290).head(20).tail(19)).values.tolist()
+    
+    for j in range(len(temp2)):
+        for k in range(len(temp2[j])):
+            temp[k].append(temp2[j][k])
+    
+    for q in range(1,len(temp)):
+        temp[q] = ([float(j) for j in temp[q]])
+        temp[q] = st.mean(temp[q])
+    
+    # temp[0] = str(temp[0][0]).split(' ')[0]
+    temp[0] = temp[0][0].decode("utf-8").split(' ')[0]
+    avgData.append(temp)
+
+graphData = [[],[],[],[],[],[],[],[],[]]
+props = ['DATE','Wind Direction (WSW)','Wind Speed (m/s)', 'Gust Speed (m/s)','Temperature (°C)','RH (%)', 'Dew Point (°C)', 'Solar Radiation (W/m²)', 'Battery (V)']
+
+for i in range(len(avgData)):
+    for j in range(len(avgData[i])):
+        graphData[j].append(avgData[i][j])
+
+for i in range(1,len(graphData)):
+    plt.plot(graphData[0],graphData[i],label=props[i])
+
+plt.legend()
+plt.show()
+# print(st.mean(temp[1]))
+    
+# print(temp[1])
+
+
+
+# latest_condition_data = getLatestConditionFromHobolink()
+# print (latest_condition_data)
