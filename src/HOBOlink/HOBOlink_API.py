@@ -77,7 +77,7 @@ def get_last_24_hour_data():
             if new_byte == b'\n':
                 list_of_lines.append(buffer.decode()[::-1])
                 if len(list_of_lines) == N:
-                    os.remove(file_name)
+                    # os.remove(file_name)
                     return (pre_process_data(list_of_lines))
                 buffer = bytearray()
             else:
