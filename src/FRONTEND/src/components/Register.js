@@ -5,6 +5,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { register } from './UserFunctions'
 
+var lablist
+var floorlist
 class Register extends Component {
   constructor() {
     super()
@@ -14,22 +16,29 @@ class Register extends Component {
       email: '',
       password: '',
       position: '',
-      floor: '',
-      lab: '',
+      floor: -1,
+      lab: 'ALL LABS',
+      list:[],
       errors: {}
     }
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    
   }
 
   onChange(e) {
     console.log(e.target.name+" "+e.target.value)
+    if(e.target.value=="admin")
+    {
+      this.setState({floor:-1})
+    }
     this.setState({ [e.target.name]: e.target.value })
   }
   onSubmit(e) {
     e.preventDefault()
-
+    var newlist=[]
+    
     const newUser = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
@@ -38,7 +47,7 @@ class Register extends Component {
       position: this.state.position,
       lab: this.state.lab,
       floor: this.state.floor,
-
+      list:newlist
     }
     console.log(newUser)
     register(newUser).then(res => {
@@ -48,6 +57,122 @@ class Register extends Component {
   }
 
   render() {
+    console.log("position"    )
+    console.log(this.state.position)
+    console.log(this.state.floor)
+    if(this.state.floor==0)
+    {
+      lablist=
+      <div className="form-group">
+      <label htmlFor="lab">Lab</label>
+      <Select
+        type="lab"
+        className="form-control"
+        name="lab"
+        placeholder="Choose Lab"
+        value={this.state.lab}
+        onChange={this.onChange}
+      >
+      <MenuItem value="0">Office and Faculty Meeting Hall</MenuItem>
+      <MenuItem value="1">Exhibition Hall</MenuItem>
+        
+      </Select>
+    </div>
+    }
+    else if(this.state.floor==1)
+    {
+      lablist=
+      <div className="form-group">
+      <label htmlFor="lab">Lab</label>
+      <Select
+        type="lab"
+        className="form-control"
+        name="lab"
+        placeholder="Choose Lab"
+        value={this.state.lab}
+        onChange={this.onChange}
+      >
+      <MenuItem value="0">WING - I</MenuItem>
+      <MenuItem value="1">WING - II</MenuItem>
+      <MenuItem value="2">WING - III</MenuItem>
+      <MenuItem value="3">WING - IV</MenuItem>
+        
+      </Select>
+    </div>
+    }
+    else if(this.state.floor==2)
+    {
+        lablist=
+        <div className="form-group">
+        <label htmlFor="lab">Lab</label>
+        <Select
+          type="lab"
+          className="form-control"
+          name="lab"
+          placeholder="Choose Lab"
+          value={this.state.lab}
+          onChange={this.onChange}
+        >
+        <MenuItem value="0">WING - I</MenuItem>
+        <MenuItem value="1">WING - II</MenuItem>
+        <MenuItem value="2">WING - III</MenuItem>
+        <MenuItem value="3">WING - IV</MenuItem>
+        </Select>
+      </div> 
+    }
+    
+    else if(this.state.floor==3)
+    {
+        lablist=
+        <div className="form-group">
+        <label htmlFor="lab">Lab</label>
+        <Select
+          type="lab"
+          className="form-control"
+          name="lab"
+          placeholder="Choose Lab"
+          value={this.state.lab}
+          onChange={this.onChange}
+        >
+        <MenuItem value="0">WING - I</MenuItem>
+        <MenuItem value="1">WING - II</MenuItem>
+        <MenuItem value="2">WING - III</MenuItem>
+        <MenuItem value="3">WING - IV</MenuItem>
+        </Select>
+      </div> 
+    }
+    else 
+    {
+        lablist=
+        <></> 
+    }
+
+    if(this.state.position=="space")
+    {
+      console.log("position scond")
+      console.log(this.state.position)
+      floorlist=
+      <div className="form-group">
+      <label htmlFor="floor">Floor</label>
+      <Select
+        type="floor"
+        className="form-control"
+        name="floor"
+        placeholder="Choose Floor"
+        value={this.state.floor}
+        onChange={this.onChange}
+      >
+        <MenuItem value="0">Ground Floor</MenuItem>
+        <MenuItem value="1">1st Floor</MenuItem>
+        <MenuItem value="2">2nd Floor</MenuItem>
+        <MenuItem value="3">3rd Floor</MenuItem>
+      </Select>
+    </div>
+    }
+    else{
+      floorlist=
+      <div></div>
+    }
     return (
       <div className="container">
         <div className="row">
@@ -119,7 +244,7 @@ class Register extends Component {
                   <div className="form-group">
                     <label htmlFor="position">Position</label>
                     <Select
-                      type="position"
+                      type="text"
                       className="form-control"
                       name="position"
                       placeholder="Choose Position"
@@ -143,36 +268,13 @@ class Register extends Component {
                     />
                   </div> */}
 
-                  <div className="form-group">
-                    <label htmlFor="floor">Floor</label>
-                    <Select
-                      type="floor"
-                      className="form-control"
-                      name="floor"
-                      placeholder="Choose Floor"
-                      value={this.state.floor}
-                      onChange={this.onChange}
-                    >
-                      <MenuItem value="0">Ground Floor</MenuItem>
-                      <MenuItem value="1">1st Floor</MenuItem>
-                      <MenuItem value="2">2nd Floor</MenuItem>
-                      <MenuItem value="3">3rd Floor</MenuItem>
-                    </Select>
-                  </div>
+                 
 
+                  {floorlist}
 
-
-                  <div className="form-group">
-                    <label htmlFor="lab">Lab</label>
-                    <input
-                      type="lab"
-                      className="form-control"
-                      name="lab"
-                      placeholder="Choose Lab"
-                      value={this.state.lab}
-                      onChange={this.onChange}
-                    />
-                  </div>
+                  {lablist}
+                    
+                    
 
                   <button
                     type="submit"

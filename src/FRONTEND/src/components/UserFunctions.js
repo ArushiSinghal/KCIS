@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const register = newUser => {
+  console.log(newUser)
   return axios
     .post('users/register', {
       first_name: newUser.first_name,
@@ -9,7 +10,8 @@ export const register = newUser => {
       password: newUser.password,
       position: newUser.position,
       floor: newUser.floor,
-      lab: newUser.lab
+      lab: newUser.lab,
+      list:newUser.list
     })
     .then(response => {
       console.log('Registered!')

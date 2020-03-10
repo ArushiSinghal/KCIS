@@ -7,5 +7,5 @@ def read_in():
 var=read_in()
 t=int(var[0])
 # print(t)
-os.system("sshpass -p 'mouni1995' ssh 'lingam@10.2.24.202' 'cd pybacnet;cd tools;python off.py %d' "%t)
+os.system("sshpass -p 'mouni1995' ssh 'user@10.2.24.157' 'cd tools;python off.py %d' "%t)
 # print ("hello")

@@ -33,6 +33,7 @@ const UserSchema = new Schema({
     type:Number,
     required:true
   },
+  list:[Number],
 })
 
 module.exports = User = mongoose.model('users', UserSchema)

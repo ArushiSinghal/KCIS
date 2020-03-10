@@ -12,3 +12,19 @@
     width: 500%;
 }
 
+.container-div{ 
+    Display: flex;
+    Height: 100vh;
+    Width: 100vw; 
+    Align-Items: center;
+    Justify-Content: centre;
+    }
+.center {
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    left: 35%;
+    top: 40%; 
+    margin-left: -150px;
+    margin-top: -150px;
+    }

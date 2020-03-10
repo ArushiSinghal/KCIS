@@ -11,7 +11,7 @@ process.env.SECRET_KEY = 'secret'
 
 users.post('/register', (req, res) => {
   const today = new Date()
-  
+  console.log(req.body)
   const userData = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
@@ -20,6 +20,7 @@ users.post('/register', (req, res) => {
     position:req.body.position,
     lab:req.body.lab,
     floor:req.body.floor,
+    list:req.body.list,
     created: today
   }
 
@@ -28,6 +29,8 @@ users.post('/register', (req, res) => {
   })
     .then(user => {
       if (!user) {
+        // console.log("HELLO")
+        // console.log(user)
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           userData.password = hash
           
@@ -65,7 +68,8 @@ users.post('/login', (req, res) => {
             email: user.email,
             position:user.position,
             lab:user.lab,
-            floor:user.floor
+            floor:user.floor,
+            list:user.list
 
           }
           let token = jwt.sign(payload, process.env.SECRET_KEY, {

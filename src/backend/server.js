@@ -27,11 +27,14 @@ mongoose
   .catch(err => console.log(err))
 
 var Users = require('./routes/Users')
+var map = require('./routes/Map')
+
 const ACrouter=require('./routes/ACcontrol');
 
 
 app.use('/users', Users)
 app.use('/control',ACrouter);
+app.use('/map',map)
 
 
 app.listen(port, function() {
