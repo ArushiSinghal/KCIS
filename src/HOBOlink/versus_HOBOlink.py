@@ -11,6 +11,9 @@ import statistics as st
 from datetime import datetime
 import numpy
 import matplotlib.pyplot as plotVersus
+# from matplotlib.pyplot import figure
+
+# figure(num=None, figsize=(8, 6), dpi=80, facecolor='w', edgecolor='k')
 
 
 # This method gives the data of latest condition which is currently available on the Hobolink cloud"
@@ -122,18 +125,78 @@ propertyList[0] = dates
 
 props = ['Date And Time','Wind Direction (WSW)','Wind Speed (m/s)', 'Gust Speed (m/s)','Temperature (°C)','RH (%)', 'Dew Point (°C)', 'Solar Radiation (W/m²)', 'Battery (V)']
 colors = ['x',  'r', 'g', 'c', 'm', 'y', 'k', 'b', 'r']
-for X in range(1, 9):
-    plotVersus.plot(propertyList[0], propertyList[X], color = colors[X], label = props[X])
-    axes = plotVersus.gca()
-    axes.xaxis.set_major_locator(plotVersus.MaxNLocator(8))
-    axes.set_title(props[X] + ' Vs Time (24 Hours)')
-    axes.set_xlabel(props[0])
-    axes.set_ylabel(props[X])
-    
-    plotVersus.legend()
-    plotVersus.show()
-    plotVersus.close()
 
+#Temperature And Solar Radiation
+fig, axOne = plotVersus.subplots()
 
+color = 'tab:red'
+axOne.set_xlabel(props[0])
+axOne.set_ylabel(props[4], color=color)
+axOne.plot(propertyList[0], propertyList[4], color=color, label=props[4])
+axOne.tick_params(axis='y', labelcolor=color)
+plotVersus.legend(loc = 'upper left')
+axOne.xaxis.set_major_locator(plotVersus.MaxNLocator(8))
 
+axTwo = axOne.twinx()
+axTwo.xaxis.set_major_locator(plotVersus.MaxNLocator(8))
+color = 'tab:blue'
+axTwo.set_ylabel(props[7], color=color)
+axTwo.plot(propertyList[0], propertyList[7], color=color, label=props[7])
+axTwo.tick_params(axis='y', labelcolor=color)
+plotVersus.legend(loc = 'upper right')
 
+fig.set_size_inches(18.5, 10.5)
+
+plotVersus.savefig("Graphs/TempSolar.png")
+plotVersus.show()
+plotVersus.close()
+
+# Temperature And Dew Point
+fig, axOne = plotVersus.subplots()
+
+color = 'tab:red'
+axOne.set_xlabel(props[0])
+axOne.set_ylabel(props[4], color=color)
+axOne.plot(propertyList[0], propertyList[4], color=color, label=props[4])
+axOne.tick_params(axis='y', labelcolor=color)
+plotVersus.legend(loc = 'upper left')
+axOne.xaxis.set_major_locator(plotVersus.MaxNLocator(8))
+
+axTwo = axOne.twinx()
+axTwo.xaxis.set_major_locator(plotVersus.MaxNLocator(8))
+color = 'tab:blue'
+axTwo.set_ylabel(props[6], color=color)
+axTwo.plot(propertyList[0], propertyList[6], color=color, label=props[6])
+axTwo.tick_params(axis='y', labelcolor=color)
+plotVersus.legend(loc = 'upper right')
+
+fig.set_size_inches(18.5, 10.5)
+
+plotVersus.savefig("Graphs/TempDew.png")
+plotVersus.show()
+plotVersus.close()
+
+# Temperature And Wind Speed
+fig, axOne = plotVersus.subplots()
+
+color = 'tab:red'
+axOne.set_xlabel(props[0])
+axOne.set_ylabel(props[4], color=color)
+axOne.plot(propertyList[0], propertyList[4], color=color, label=props[4])
+axOne.tick_params(axis='y', labelcolor=color)
+plotVersus.legend(loc = 'upper left')
+axOne.xaxis.set_major_locator(plotVersus.MaxNLocator(8))
+
+axTwo = axOne.twinx()
+axTwo.xaxis.set_major_locator(plotVersus.MaxNLocator(8))
+color = 'tab:blue'
+axTwo.set_ylabel(props[2], color=color)
+axTwo.plot(propertyList[0], propertyList[2], color=color, label=props[2])
+axTwo.tick_params(axis='y', labelcolor=color)
+plotVersus.legend(loc = 'upper right')
+
+fig.set_size_inches(18.5, 10.5)
+
+plotVersus.savefig("Graphs/TempWind.png")
+plotVersus.show()
+plotVersus.close()

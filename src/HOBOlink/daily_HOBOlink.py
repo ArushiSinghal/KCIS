@@ -129,10 +129,15 @@ for X in range(1, 9):
     axes.set_title(props[X] + ' Vs Time (24 Hours)')
     axes.set_xlabel(props[0])
     axes.set_ylabel(props[X])
+
+
+    fig = plotVersus.gcf()
+    fig.set_size_inches(18.5, 10.5)
     
     plotVersus.legend()
+    plotVersus.savefig('./Graphs/Daily' +str(X) + '.png')
+
     plotVersus.show()
-    plotVersus.savefig('./Graphs/' +str(X) + '.png')
     plotVersus.close()
 
 
