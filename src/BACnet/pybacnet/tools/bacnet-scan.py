@@ -53,9 +53,9 @@ def main():
   opts, args = parser.parse_args()
   filename = args[0] if len(args) else '-'
   if filename != '-':
-    fout = open("/home/fanish/manasafan/pybacnet/tools/test.json", 'wb')
+    fout = open("test.json", 'wb')
   else:
-    fout = open("/home/fanish/manasafan/pybacnet/tools/test.json", 'wb')
+    fout = open("test.json", 'wb')
 #fout = sys.stdout
   print(opts)
   # MUST USE default port for whois
@@ -115,6 +115,7 @@ def main():
 	      value = None
 
         now = datetime.datetime.now()
+        #date_time = now
         date_time = now.strftime("%Y-%m-%d %H:%M")
         device['objs'].append({
           'props': h_obj,
@@ -127,8 +128,8 @@ def main():
           })
       print >>sys.stderr, device['name'], "has", len(device['objs']), "objects"
       device_list.append(device)
+  #print("\n\n\n\n ff \n",device_list)
   json.dump(device_list, fout)
-  print(device_list)
   fout.close()
 
 if __name__ == "__main__":

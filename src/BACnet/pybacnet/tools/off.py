@@ -1,7 +1,22 @@
 from pybacnet import bacnet
+import sys, urllib2, json, os, pprint, time
 import time
 #bacnet.Init(None, None)
-#parser = optparse.OptionParser()
+import optparse
+import json
+import datetime
+import sys
+
+acno = int(sys.argv[1])
+#print acno
+parser = optparse.OptionParser()
+parser.add_option('-i', '--interface', dest='interface',
+                   default=None,
+                    help='Network interface to broadcast over')
+parser.add_option('-p', '--ip-filter', dest='fip', default=None,
+                    help='Filter devices by IP prefix')
+
+opts, args = parser.parse_args()
 
 
 
@@ -23,14 +38,20 @@ print
 
 #h_obj = bacnet.read_prop(h_dev, bacnet.OBJECT_DEVICE, h_dev['device_id'], bacnet.PROP_OBJECT_LIST, 2)
 #h_obj={u'type_str': u'analog-value', u'instance': 17162, u'type': 2}
-h_obj={u'type_str': u'binary-input', u'instance': 17154, u'type': 3}
-print h_obj
+h_obj1={u'type_str': u'binary-output', u'instance': 17153, u'type': 4}
+h_obj2={u'type_str': u'binary-output', u'instance': 18689, u'type': 4}
 #print
 #rint  bacnet.read_prop(h_dev, bacnet.OBJECT_DEVICE, h_dev['device_id'], bacnet.PROP_OBJECT_LIST, 0)
 #print
-print  bacnet.read_prop(h_dev, h_obj['type'], h_obj['instance'], bacnet.PROP_PRESENT_VALUE, -1)
 #print
-print bacnet.write_prop(h_dev, h_obj['type'], h_obj['instance'],bacnet.PROP_OBJECT_NAME,  bacnet.BACNET_APPLICATION_TAG_BOOLEAN, '1',1)
+if acno == 1:
+	print bacnet.write_prop(h_dev, h_obj1['type'], h_obj1['instance'],bacnet.PROP_PRESENT_VALUE,  bacnet.PROP_STATE_SYSTEM_STATUS, '0',2)
+else :
+	print bacnet.write_prop(h_dev, h_obj2['type'], h_obj2['instance'],bacnet.PROP_PRESENT_VALUE,  bacnet.PROP_STATE_SYSTEM_STATUS, '0',2)
+
+
+#time.sleep(10)
+#print  bacnet.read_prop(h_dev, h_obj['type'], h_obj['instance'], bacnet.PROP_PRESENT_VALUE, -1)
 """for i in dir(bacnet):
     try:
         aaa = bacnet.write_prop(h_dev, h_obj['type'], h_obj['instance'], eval('bacnet.' + i),  bacnet.BACNET_APPLICATION_TAG_BOOLEAN, '0', 16)
