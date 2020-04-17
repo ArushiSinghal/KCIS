@@ -189,14 +189,14 @@ const AccountDetails = props => {
           </Grid>
         </CardContent>
         <Divider />
-        <CardActions>
+        {/*<CardActions>
           <Button
             color="primary"
             variant="contained"
           >
             Save details
           </Button>
-        </CardActions>
+        </CardActions>*/}
       </form>
     </Card>
   );

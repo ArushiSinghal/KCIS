@@ -73,11 +73,7 @@ console.log(user)
       href: '/users',
       icon: <PeopleIcon />
     },
-    {
-      title: 'View',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
-    },
+    
     {
       title: 'Authentication',
       href: '/sign-in',
@@ -108,16 +104,7 @@ else if(user=="space"){
       icon: <TextFieldsIcon />
     },
    
-    {
-      title: 'Users',
-      href: '/users',
-      icon: <PeopleIcon />
-    },
-    {
-      title: 'View',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
-    },
+    
     {
       title: 'Authentication',
       href: '/sign-in',
@@ -167,3 +154,44 @@ Sidebar.propTypes = {
 };
 
 export default Sidebar;
+
+// {
+//   title: 'Dashboard',
+//   href: '/dashboard',
+//   icon: <DashboardIcon />
+// },
+// {
+//   title: 'Control AC',
+//   href: '/typography',
+//   icon: <TextFieldsIcon />
+// },
+// {
+//   title: 'User Request',
+//   href: '/icons',
+//   icon: <ImageIcon />
+// },
+// {
+//   title: 'Users',
+//   href: '/users',
+//   icon: <PeopleIcon />
+// },
+// {
+//   title: 'View',
+//   href: '/products',
+//   icon: <ShoppingBasketIcon />
+// },
+// {
+//   title: 'Authentication',
+//   href: '/sign-in',
+//   icon: <LockOpenIcon />
+// },
+// {
+//   title: 'Account',
+//   href: '/account',
+//   icon: <AccountBoxIcon />
+// },
+// {
+//   title: 'Settings',
+//   href: '/settings',
+//   icon: <SettingsIcon />
+// }

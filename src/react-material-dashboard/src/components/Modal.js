@@ -69,7 +69,7 @@ class modal extends Component {
   }
   settemp=(event,value)=>{
     console.log(value)
-    console.log(this.props)
+    
     this.setState({tempvalue:value})}
     
   
@@ -116,24 +116,27 @@ class modal extends Component {
 
   }
   permission(event){
-    console.log("HEE HASE DE  RINKIYA KE ") 
+    
     console.log(this.props.ac)
     var info={
       email:decoded.email,
       ac:this.props.ac
     }
     console.log(info)
+    console.log("FUCK THIS WORLD")
     axios.post('http://localhost:5000/request/add',info)
     .then(res=>{console.log('Request has been sent')
+    
     })
     .catch(err=>console.log("Some kind of error is there"))
     // this.props.close()
   }
   render(){
-    console.log("MY MY")
-    console.log(this.props.ac)
-    console.log(this.state.list.includes(this.props.ac))
-    console.log(decoded)
+    // console.log("MY MY")
+    // console.log(this.props)
+    // console.log(this.props.ac)
+    // console.log(this.state.list.includes(this.props.ac))
+    // console.log(decoded)
     if (this.state.isOn == "on"  && (this.state.list.includes(this.props.ac)==true||decoded.position=="admin" ) )
     {
         

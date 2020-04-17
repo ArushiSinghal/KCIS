@@ -11,7 +11,8 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
-
+import axios from 'axios';
+import jwt_decode from 'jwt-decode'
 const useStyles = makeStyles(() => ({
   root: {}
 }));
@@ -25,12 +26,46 @@ const Password = props => {
     password: '',
     confirm: ''
   });
-
+  const [errors,seterrors]=useState({
+    passworderror:''
+  });
   const handleChange = event => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
+  };
+
+  const handlePassword = event => {
+    if(values.password==values.confirm)
+    {
+      console.log("GOOD PASSWORD")
+      seterrors({
+        ...errors,
+        ['passworderror']:''
+      })
+      const token = localStorage.usertoken
+      const decoded = jwt_decode(token)
+      console.log(decoded.email)
+      var reset={
+        email:decoded.email,
+        password:values.password
+      }
+      axios.post('http://localhost:5000/users/passwordupdate',reset)
+      .then(res=>{
+        seterrors({
+          ...errors,
+          ['passworderror']:'Password reset'
+        })
+      })
+    }
+    else
+    {
+      seterrors({
+        ...errors,
+        ['passworderror']:'*Entered password are not same'
+      })
+    }
   };
 
   return (
@@ -65,15 +100,19 @@ const Password = props => {
             variant="outlined"
           />
         </CardContent>
+        
         <Divider />
         <CardActions>
-          <Button
+          <Button onClick={handlePassword}
             color="primary"
             variant="outlined"
           >
             Update
           </Button>
+          
         </CardActions>
+      
+          {errors.passworderror}
       </form>
     </Card>
   );

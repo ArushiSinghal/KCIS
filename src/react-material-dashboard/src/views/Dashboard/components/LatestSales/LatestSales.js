@@ -227,7 +227,7 @@ if(change==1){
           
         </Select>
       </>}
-        title="Latest Sales"
+        title="Graphical Data"
       />
       
 

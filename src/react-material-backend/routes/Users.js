@@ -134,4 +134,30 @@ users.route('/').get((req,res)=>{
       console.log(users)})
       .catch(err=>res.status(400).json('Error: '+err));
 });
+
+users.post('/passwordupdate',(req,res)=>{
+  console.log(req.body)
+
+  // User.update({email:req.body.email},{$set:{password:req.body.password}})
+  // .then(users=>{
+  //   console.log("Password changed")
+  //   console.log(users)
+  // })
+  // .catch(err=>
+  //   console.log(err)
+  // )
+  bcrypt.hash(req.body.password, 10, (err, hash) => {
+    req.body.password = hash
+    console.log(req.body)    
+    User.update({email:req.body.email},{$set:{password:req.body.password}})
+      .then(user => {
+        console.log("Password changed")
+        console.log(users)
+        
+      })
+      .catch(err => {
+        res.send('error: ' + err)
+      })
+  })
+});
 module.exports = users

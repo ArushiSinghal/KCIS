@@ -556,7 +556,7 @@ class Control extends Component {
                 show={this.state.isShowing}
                 close={this.closeModalHandler}
                 ac={this.state.ac}>
-                    Maybe aircrafts fly very high because they dont want to be seen in plane sight?
+                    
             </Modal>
         
             </div>
