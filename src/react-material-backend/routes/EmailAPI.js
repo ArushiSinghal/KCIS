@@ -50,7 +50,7 @@ router.route('/send').post((req,res)=>{
     from: 'krbdashboard@outlook.com',
     to: req.body.email,
     subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
+    html: '<h1> Energy Saving Alert<\h1><p> Please check on the AC usage in your lab!<\p>'
     };
     transporter.sendMail(mailOptions, function(error, info){
     if (error) {
