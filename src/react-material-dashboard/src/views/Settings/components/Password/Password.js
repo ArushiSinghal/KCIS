@@ -23,6 +23,7 @@ const Password = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
+    previous:'',
     password: '',
     confirm: ''
   });
@@ -49,13 +50,17 @@ const Password = props => {
       console.log(decoded.email)
       var reset={
         email:decoded.email,
-        password:values.password
+        password:values.password,
+        previous:values.previous
       }
+      console.log("PASSWORD")
+      console.log(decoded)
       axios.post('http://localhost:5000/users/passwordupdate',reset)
       .then(res=>{
+        // console.log(res)
         seterrors({
           ...errors,
-          ['passworderror']:'Password reset'
+          ['passworderror']:res.data
         })
       })
     }
@@ -80,18 +85,31 @@ const Password = props => {
         />
         <Divider />
         <CardContent>
+        
           <TextField
             fullWidth
-            label="Password"
+            label="Old Password"
+            name="previous"
+            onChange={handleChange}
+            type="password"
+            value={values.previous}
+            variant="outlined"
+          />
+          <br/>
+          <br/>
+          <TextField
+            fullWidth
+            label="New Password"
             name="password"
             onChange={handleChange}
             type="password"
             value={values.password}
             variant="outlined"
           />
+
           <TextField
             fullWidth
-            label="Confirm password"
+            label="Confirm New password"
             name="confirm"
             onChange={handleChange}
             style={{ marginTop: '1rem' }}

@@ -74,11 +74,7 @@ console.log(user)
       icon: <PeopleIcon />
     },
     
-    {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
-    },
+    
     {
       title: 'Account',
       href: '/account',
@@ -105,11 +101,7 @@ else if(user=="space"){
     },
    
     
-    {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
-    },
+   
     {
       title: 'Account',
       href: '/account',

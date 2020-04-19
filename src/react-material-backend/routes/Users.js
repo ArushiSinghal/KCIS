@@ -136,7 +136,7 @@ users.route('/').get((req,res)=>{
 });
 
 users.post('/passwordupdate',(req,res)=>{
-  console.log(req.body)
+  // console.log(req.body)
 
   // User.update({email:req.body.email},{$set:{password:req.body.password}})
   // .then(users=>{
@@ -149,15 +149,32 @@ users.post('/passwordupdate',(req,res)=>{
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     req.body.password = hash
     console.log(req.body)    
-    User.update({email:req.body.email},{$set:{password:req.body.password}})
-      .then(user => {
-        console.log("Password changed")
-        console.log(users)
-        
+    User.find({email:req.body.email})
+    .then(user=>{
+      console.log(user)
+      console.log(user[0]["password"])
+      bcrypt.compare(req.body.previous,user[0].password,(err,ismatch)=>{
+        console.log(ismatch)
+        if(!ismatch)
+        {
+          res.json("Old Password doesn't match")
+        }
+        else{
+          User.update({email:req.body.email},{$set:{password:req.body.password}})
+          .then(users => {
+            res.json("Password changed")
+            // console.log(users)
+            
+          })
+          .catch(err => {
+            res.send('error: ' + err)
+          })
+        }
       })
-      .catch(err => {
-        res.send('error: ' + err)
-      })
+    })
+      
+
+    
   })
 });
 module.exports = users

@@ -492,7 +492,7 @@ class Control extends Component {
             resetbut=
             <></>
         }
-        if(this.state.position=="admin")
+        if(this.state.position=="admin"||this.state.position=="space")
         {
             // console.log("LODDE LAG GAYE")
             selectfloor=

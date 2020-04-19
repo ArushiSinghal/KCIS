@@ -46,7 +46,7 @@ const UsersTable = props => {
   let { className, users, ...rest } = props;
 
   const classes = useStyles();
-
+  console.log("YES "+props.search)
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
@@ -99,7 +99,7 @@ const UsersTable = props => {
   // console.log("USERLIST")
   // console.log(userlist)
   users=userlist.filter(function(user){
-    return user.position=="space"
+    return user.position=="space" && (user.first_name.startsWith(props.search)||props.search=='')
   })
   // console.log(users)
   // console.log("PAGE "+page)
