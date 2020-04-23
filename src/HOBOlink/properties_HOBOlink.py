@@ -125,7 +125,11 @@ for i in range(len(avgData)):
 for i in range(1,len(graphData)):
     plt.plot(graphData[0],graphData[i],label=props[i])
 
+fig = plt.gcf()
+fig.set_size_inches(18.5, 10.5)
 plt.legend()
+plt.savefig('./Graphs/All.png')
+
 plt.show()
 # print(st.mean(temp[1]))
     
