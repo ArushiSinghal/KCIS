@@ -69,6 +69,7 @@ SRS, Design Document, Design Plan
 
 ![Use Case](./diagrams/Usecase.png)
 
+![State Diagram](./diagrams/StateDiagram.png)
 
 ## Sprint Two
 
@@ -195,24 +196,29 @@ This feature is implemented using node packages.
 
 ## Sprint Seven
 
-The admin dashboard has the additional functionality of being able to send email alerts to the users based on over usage. This is done via a button click trigger. The email functionality is implemented using the NodeJS nodemailer package.
++ The admin dashboard has the additional functionality of being able to send email alerts to the users based on over usage. This is done via a button click trigger. The email functionality is implemented using the NodeJS nodemailer package.
 
-Social media authentication via Gmail was added to the login page and the 
++ Social media authentication via Gmail was added to the login page using a NodeJS gmail package that sets up an SMTP server 
 
-The client asked for extensive documentation which can help the unaware user to set up and the run the application on his or her system. This was completed and submitted in the seventh sprint.
+![Email](./diagrams/SequenceEmail.png)
+
++ The client asked for extensive documentation which can help the unaware user to set up and the run the application on his or her system. This was completed and submitted in the seventh sprint.
 
 ## Sprint Eight
 
-The testing mostly involved manual checking. That is, running a python script and checking whether the desired output has been obtained. 
+### Unit Testing
++ The testing mostly involved manual checking. That is, running a python script and checking whether the desired output has been obtained. 
 
-For example, the script  created to check the state of the AC. Here, we can switch the AC off through the app, and verify that the AC is actually off by getting the state of the AC through the script.
++ For example, the script  created to check the state of the AC. Here, we can switch the AC off through the app, and verify that the AC is actually off by getting the state of the AC through the script.
 
-Testing on software level to check if the server is working or not, and api are
-being properly served.
-Testing on hardware level to check if AC is responding to the given input through
-BACnet protocols.
+### System Testing
++ Testing on software level to check if the server is working or not, and api are being properly served.
++ Testing on hardware level to check if AC is responding to the given input through BACnet protocols.
 
-HOBOlink data graphs were tested by looking at the KRB HOBOlink website and comparing the data values plotted in the graphs using python scripts.
++ HOBOlink data graphs were tested by looking at the KRB HOBOlink website and comparing the data values plotted in the graphs using python scripts.
+
+### Integration Testing 
++  Individual units were combined and tested as a group. The purpose of this level of testing is to expose faults in the interaction between integrated units. The CSS embedded mails were tested multiple times with different users. As well and the user request feature as it involves multiple accounts.
 
 ## The End Product
 
