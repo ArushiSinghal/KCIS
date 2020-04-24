@@ -1,10 +1,12 @@
 const router=require('express').Router();
 let requests=require('../models/request.js');
 router.route('/').get((req,res)=>{
+    console.log("REQUEST GET")
     requests.find()
-        .then(users=>{res.json(users);
-        console.log(users)
-        console.log("SOMETHING WRONG IS HAPPEING IN GET")})
+        .then(users=>{
+            res.json(users);
+            console.log(users)
+        })
         .catch(err=>res.status(400).json('Error: '+err));
 });
 router.route('/add').post((req,res)=>{
@@ -31,7 +33,7 @@ router.route('/delete').post((req,res)=>{
     const Email=req.body.email
     const ac=req.body.ac
     console.log(req.body)
-    requests.remove({Email:Email,ac:ac})
+    requests.deleteOne({Email:Email,ac:ac})
     .then(user=>console.log(user))
     .catch(()=>console.log("Record cannot be deleted"))
 })

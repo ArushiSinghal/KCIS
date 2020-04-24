@@ -122,12 +122,9 @@ class modal extends Component {
       email:decoded.email,
       ac:this.props.ac
     }
-    console.log(info)
-    console.log("FUCK THIS WORLD")
+
     axios.post('http://localhost:5000/request/add',info)
-    .then(res=>{console.log('Request has been sent')
-    
-    })
+    .then(console.log("REQUEST ADDED"))
     .catch(err=>console.log("Some kind of error is there"))
     // this.props.close()
   }
@@ -166,6 +163,10 @@ class modal extends Component {
     on_off=
     <div>
     You dont have permission to control this AC
+    <br/>
+    AC Name: {this.props.ac_name}
+    <br/>
+    AC No: {this.props.ac}
     </div>
     set_button=
     <Button variant="secondary"  onClick={this.permission.bind(this)}>Ask permission</Button>

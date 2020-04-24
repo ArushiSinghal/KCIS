@@ -52,8 +52,11 @@ const UsersTable = props => {
   const [page, setPage] = useState(0);
   const [userlist,setuserlist]=useState([]);
   useEffect(() => {
+    console.log("START")
     axios.get('http://localhost:5000/users/')
-    .then(user=>setuserlist(user.data))
+    .then(user=>{
+      console.log("END")
+      setuserlist(user.data)})
   }, [])
   const handleSelectAll = event => {
     

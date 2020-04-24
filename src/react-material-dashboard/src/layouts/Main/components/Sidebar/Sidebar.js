@@ -88,31 +88,57 @@ console.log(user)
   ];
 }
 else if(user=="space"){
-   pages = [
-    {
-      title: 'Dashboard',
-      href: '/dashboard',
-      icon: <DashboardIcon />
-    },
-    {
-      title: 'Control AC',
-      href: '/typography',
-      icon: <TextFieldsIcon />
-    },
-   
+  if(localStorage.getItem("google")==1)
+  {
+    pages = [
+      {
+        title: 'Dashboard',
+        href: '/dashboard',
+        icon: <DashboardIcon />
+      },
+      {
+        title: 'Control AC',
+        href: '/typography',
+        icon: <TextFieldsIcon />
+      },
     
-   
-    {
-      title: 'Account',
-      href: '/account',
-      icon: <AccountBoxIcon />
-    },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
-    }
-  ];
+      
+    
+      {
+        title: 'Account',
+        href: '/account',
+        icon: <AccountBoxIcon />
+      },
+     
+    ]
+  }
+  else{
+    pages = [
+      {
+        title: 'Dashboard',
+        href: '/dashboard',
+        icon: <DashboardIcon />
+      },
+      {
+        title: 'Control AC',
+        href: '/typography',
+        icon: <TextFieldsIcon />
+      },
+    
+      
+    
+      {
+        title: 'Account',
+        href: '/account',
+        icon: <AccountBoxIcon />
+      },
+      {
+        title: 'Settings',
+        href: '/settings',
+        icon: <SettingsIcon />
+      }
+    ]
+  }
 }
   return (
     <Drawer
