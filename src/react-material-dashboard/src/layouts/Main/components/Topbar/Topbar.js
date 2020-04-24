@@ -37,6 +37,7 @@ const Topbar = props => {
     console.log(props)
     e.preventDefault()
     localStorage.removeItem('usertoken')
+    localStorage.removeItem("google")
     setshit(1)
     // history.go("/")
   }
